@@ -81,7 +81,8 @@ namespace MIPS_Assembler
             string Inst = campos[0];
 
             switch (Inst)
-            {
+            {   
+                //Tipo R***************************
                 case "add":
                     return tipo_r(instrucao, sep);
                     break;
@@ -97,18 +98,30 @@ namespace MIPS_Assembler
                 case "slt":
                     return tipo_r(instrucao, sep);
                     break;
+                //Tipo I***************************
                 case "addi":
+                    return tipo_i(instrucao, sep);
+                    break;
+                case "andi":
+                    return tipo_i(instrucao, sep);
+                    break;
+                case "ori":
+                    return tipo_i(instrucao, sep);
+                    break;
+                case "slti":
                     return tipo_i(instrucao, sep);
                     break;
                 case "beq":
                     return tipo_i(instrucao, sep);
                     break;
+                //Tipo "MEM"***********************
                 case "lw":
                     return tipo_mem(instrucao, sep);
                     break;
                 case "sw":
                     return tipo_mem(instrucao, sep);
                     break;
+                //Tipo J***************************
                 case "j":
                     return tipo_j(instrucao, sep);
                     break;
@@ -176,6 +189,18 @@ namespace MIPS_Assembler
             {
                 case "addi":
                     cod_maq = "001000" + sep + hex2binary(Y).PadLeft(5, '0') + sep + hex2binary(X).PadLeft(5, '0') + sep + hex2binary(i).PadLeft(16, '0');
+                    Status = "Conversão efetuada com sucesso";
+                    break;
+                case "andi":
+                    cod_maq = "001100" + sep + hex2binary(Y).PadLeft(5, '0') + sep + hex2binary(X).PadLeft(5, '0') + sep + hex2binary(i).PadLeft(16, '0');
+                    Status = "Conversão efetuada com sucesso";
+                    break;
+                case "ori":
+                    cod_maq = "001101" + sep + hex2binary(Y).PadLeft(5, '0') + sep + hex2binary(X).PadLeft(5, '0') + sep + hex2binary(i).PadLeft(16, '0');
+                    Status = "Conversão efetuada com sucesso";
+                    break;
+                case "slti":
+                    cod_maq = "001010" + sep + hex2binary(Y).PadLeft(5, '0') + sep + hex2binary(X).PadLeft(5, '0') + sep + hex2binary(i).PadLeft(16, '0');
                     Status = "Conversão efetuada com sucesso";
                     break;
                 case "beq":
@@ -264,6 +289,9 @@ namespace MIPS_Assembler
                 "SW $X, i($Y)" + "\n" +
                 "BEQ $X, $Y, i" + "\n" +
                 "ADDi $X, $Y, i" + "\n" +
+                "ANDi $X, $Y, i" + "\n" +
+                "ORi $X, $Y, i" + "\n" +
+                "SLTi $X, $Y, i" + "\n" +
                 "J i" + "\n" + "\n" +
                 "\nResistradores: \n\n$0, $1, $2, $3, $4, $5, $6, $7" + 
                 "\nObs: Usar o $ antes do registrador,\nespaço simples e vírgula." +
