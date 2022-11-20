@@ -19,3 +19,11 @@ As seguintes instruções são suportadas:
  * ORi $X, $Y, i
  * SLTi $X, $Y, i
  * J i
+ * XOR $X, $Y, shamt
+ * SLL %X, $Y, shamt
+ * SRL %X, $Y, shamt
+ * SRA %X, $Y, shamt
+ * SLLv %X, $Y, $Z
+ * SRLv %X, $Y, shamt
+ * SRAv %X, $Y, shamt
+ * JAL i
