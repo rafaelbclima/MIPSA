@@ -58,56 +58,61 @@
             // 
             // richTextBox_MIPS
             // 
-            this.richTextBox_MIPS.Location = new System.Drawing.Point(289, 56);
+            this.richTextBox_MIPS.Location = new System.Drawing.Point(385, 69);
+            this.richTextBox_MIPS.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox_MIPS.Name = "richTextBox_MIPS";
-            this.richTextBox_MIPS.Size = new System.Drawing.Size(117, 595);
+            this.richTextBox_MIPS.Size = new System.Drawing.Size(155, 731);
             this.richTextBox_MIPS.TabIndex = 0;
-            this.richTextBox_MIPS.Text = "ADD $1, $2, $3\nSUB $1, $2, $3\nAND $1, $2, $3\nOR $1, $2, $3\nSLT $1, $2, $3\nLW $1, " +
-    "5($2) \nSW $1, 5($2)\nBEQ $1, $2, 5\nADDi $1, $2, 5\nANDi $1, $2, 5\nORi $1, $2, 5\nSL" +
-    "Ti $1, $2, 5\nJ 5";
+            this.richTextBox_MIPS.Text = resources.GetString("richTextBox_MIPS.Text");
+            this.richTextBox_MIPS.TextChanged += new System.EventHandler(this.richTextBox_MIPS_TextChanged);
             // 
             // richTextBox_cod_maq
             // 
-            this.richTextBox_cod_maq.Location = new System.Drawing.Point(412, 56);
+            this.richTextBox_cod_maq.Location = new System.Drawing.Point(549, 69);
+            this.richTextBox_cod_maq.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox_cod_maq.Name = "richTextBox_cod_maq";
             this.richTextBox_cod_maq.ReadOnly = true;
-            this.richTextBox_cod_maq.Size = new System.Drawing.Size(238, 595);
+            this.richTextBox_cod_maq.Size = new System.Drawing.Size(316, 731);
             this.richTextBox_cod_maq.TabIndex = 1;
             this.richTextBox_cod_maq.Text = "";
             // 
             // textBox_Status
             // 
-            this.textBox_Status.Location = new System.Drawing.Point(13, 30);
+            this.textBox_Status.Location = new System.Drawing.Point(17, 37);
+            this.textBox_Status.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_Status.Name = "textBox_Status";
             this.textBox_Status.ReadOnly = true;
-            this.textBox_Status.Size = new System.Drawing.Size(249, 20);
+            this.textBox_Status.Size = new System.Drawing.Size(331, 22);
             this.textBox_Status.TabIndex = 3;
             this.textBox_Status.Text = "Status";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(286, 40);
+            this.label1.Location = new System.Drawing.Point(381, 49);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.Size = new System.Drawing.Size(102, 16);
             this.label1.TabIndex = 4;
             this.label1.Text = "Assembly MIPS";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(409, 40);
+            this.label2.Location = new System.Drawing.Point(545, 49);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 13);
+            this.label2.Size = new System.Drawing.Size(125, 16);
             this.label2.TabIndex = 5;
             this.label2.Text = "Código de Máquina";
             // 
             // checkBox_sep
             // 
             this.checkBox_sep.AutoSize = true;
-            this.checkBox_sep.Location = new System.Drawing.Point(582, 36);
+            this.checkBox_sep.Location = new System.Drawing.Point(776, 44);
+            this.checkBox_sep.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox_sep.Name = "checkBox_sep";
-            this.checkBox_sep.Size = new System.Drawing.Size(32, 17);
+            this.checkBox_sep.Size = new System.Drawing.Size(36, 20);
             this.checkBox_sep.TabIndex = 6;
             this.checkBox_sep.Text = "_";
             this.checkBox_sep.UseVisualStyleBackColor = true;
@@ -115,13 +120,14 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.arquivoToolStripMenuItem,
             this.sobreToolStripMenuItem,
             this.ajudaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(662, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(883, 28);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -132,14 +138,14 @@
             this.converterToolStripMenuItem,
             this.configuraçõesDoMifToolStripMenuItem});
             this.arquivoToolStripMenuItem.Name = "arquivoToolStripMenuItem";
-            this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.arquivoToolStripMenuItem.Text = "Arquivo";
             // 
             // abrirmifToolStripMenuItem
             // 
             this.abrirmifToolStripMenuItem.Name = "abrirmifToolStripMenuItem";
             this.abrirmifToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F4;
-            this.abrirmifToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.abrirmifToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
             this.abrirmifToolStripMenuItem.Text = "Abrir";
             this.abrirmifToolStripMenuItem.Click += new System.EventHandler(this.abrirmifToolStripMenuItem_Click);
             // 
@@ -147,7 +153,7 @@
             // 
             this.converterToolStripMenuItem.Name = "converterToolStripMenuItem";
             this.converterToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.converterToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.converterToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
             this.converterToolStripMenuItem.Text = "Converter";
             this.converterToolStripMenuItem.Click += new System.EventHandler(this.converterToolStripMenuItem_Click);
             // 
@@ -155,30 +161,31 @@
             // 
             this.configuraçõesDoMifToolStripMenuItem.Name = "configuraçõesDoMifToolStripMenuItem";
             this.configuraçõesDoMifToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6;
-            this.configuraçõesDoMifToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.configuraçõesDoMifToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
             this.configuraçõesDoMifToolStripMenuItem.Text = "Configurações ";
             this.configuraçõesDoMifToolStripMenuItem.Click += new System.EventHandler(this.configuraçõesDoMifToolStripMenuItem_Click);
             // 
             // sobreToolStripMenuItem
             // 
             this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
-            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.sobreToolStripMenuItem.Text = "Sobre";
             this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
             // 
             // ajudaToolStripMenuItem
             // 
             this.ajudaToolStripMenuItem.Name = "ajudaToolStripMenuItem";
-            this.ajudaToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.ajudaToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.ajudaToolStripMenuItem.Text = "Ajuda";
             this.ajudaToolStripMenuItem.Click += new System.EventHandler(this.ajudaToolStripMenuItem_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(268, 56);
+            this.richTextBox1.Location = new System.Drawing.Point(357, 69);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(21, 595);
+            this.richTextBox1.Size = new System.Drawing.Size(27, 731);
             this.richTextBox1.TabIndex = 8;
             this.richTextBox1.Text = "00\n01\n02\n03\n04\n05\n06\n07\n08\n09\n0A\n0B\n0C\n0D\n0E\n0F\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n1A\n" +
     "1B\n1C\n1D\n1E\n1F\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n3A\n3B\n3C";
@@ -186,10 +193,11 @@
             // richTextBox_comentarios
             // 
             this.richTextBox_comentarios.EnableAutoDragDrop = true;
-            this.richTextBox_comentarios.Location = new System.Drawing.Point(13, 56);
+            this.richTextBox_comentarios.Location = new System.Drawing.Point(17, 69);
+            this.richTextBox_comentarios.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox_comentarios.Name = "richTextBox_comentarios";
             this.richTextBox_comentarios.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.richTextBox_comentarios.Size = new System.Drawing.Size(249, 557);
+            this.richTextBox_comentarios.Size = new System.Drawing.Size(331, 685);
             this.richTextBox_comentarios.TabIndex = 9;
             this.richTextBox_comentarios.Text = "Comentários";
             // 
@@ -197,9 +205,10 @@
             // 
             this.pictureBox_convert.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_convert.Image = global::MIPS_Assembler.Properties.Resources.refresh_icon_8;
-            this.pictureBox_convert.Location = new System.Drawing.Point(620, 23);
+            this.pictureBox_convert.Location = new System.Drawing.Point(827, 28);
+            this.pictureBox_convert.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox_convert.Name = "pictureBox_convert";
-            this.pictureBox_convert.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox_convert.Size = new System.Drawing.Size(39, 36);
             this.pictureBox_convert.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_convert.TabIndex = 15;
             this.pictureBox_convert.TabStop = false;
@@ -208,9 +217,10 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::MIPS_Assembler.Properties.Resources.download__1_;
-            this.pictureBox3.Location = new System.Drawing.Point(219, 619);
+            this.pictureBox3.Location = new System.Drawing.Point(292, 762);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(43, 32);
+            this.pictureBox3.Size = new System.Drawing.Size(57, 39);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 14;
             this.pictureBox3.TabStop = false;
@@ -218,9 +228,10 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::MIPS_Assembler.Properties.Resources.UFCG_lateral;
-            this.pictureBox2.Location = new System.Drawing.Point(99, 619);
+            this.pictureBox2.Location = new System.Drawing.Point(132, 762);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(106, 32);
+            this.pictureBox2.Size = new System.Drawing.Size(141, 39);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 13;
             this.pictureBox2.TabStop = false;
@@ -228,9 +239,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::MIPS_Assembler.Properties.Resources.rafael_logo_retangulo;
-            this.pictureBox1.Location = new System.Drawing.Point(13, 619);
+            this.pictureBox1.Location = new System.Drawing.Point(17, 762);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(74, 32);
+            this.pictureBox1.Size = new System.Drawing.Size(99, 39);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
@@ -242,9 +254,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(662, 655);
+            this.ClientSize = new System.Drawing.Size(883, 806);
             this.Controls.Add(this.pictureBox_convert);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
@@ -261,6 +273,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "MIPS Assembler";

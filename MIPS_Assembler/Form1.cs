@@ -1,10 +1,13 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace MIPS_Assembler
@@ -69,15 +72,31 @@ namespace MIPS_Assembler
                     MessageBox.Show("Instrução não suportada ou formato inválido!\nVerifique se ficou algum espaço ou linha em branco.");
                 }
             }
+            catch(System.FormatException fe)
+            {
+                var st = new StackTrace(fe, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("line: " + line + "erro: " + fe.ToString());     
+            }
             catch
             {
                 Status = "Instrução não suportada ou formato inválido";
+               
             }
+            
         }
 
         private string assembler_mips(string instrucao, string sep)
         {
-            string[] campos = instrucao.ToLower().Split(' ');
+           
+            string[] campos = Regex.Split(instrucao.ToLower(), @"[, ]+");
+            instrucao = String.Join(" ", campos);   
+            
+            
+            Console.WriteLine(campos.Length + " > " + instrucao);
             string Inst = campos[0];
 
             switch (Inst)
@@ -95,7 +114,28 @@ namespace MIPS_Assembler
                 case "or":
                     return tipo_r(instrucao, sep);
                     break;
+                case "nor":
+                    return tipo_r(instrucao, sep);
+                    break;
                 case "slt":
+                    return tipo_r(instrucao, sep);
+                    break;
+                case "sll":
+                    return tipo_r(instrucao, sep);
+                    break;
+                case "srl":
+                    return tipo_r(instrucao, sep);
+                    break;
+                case "sra":
+                    return tipo_r(instrucao, sep);
+                    break;
+                case "sllv":
+                    return tipo_r(instrucao, sep);
+                    break;
+                case "srlv":
+                    return tipo_r(instrucao, sep);
+                    break;
+                case "srav":
                     return tipo_r(instrucao, sep);
                     break;
                 //Tipo I***************************
@@ -125,6 +165,9 @@ namespace MIPS_Assembler
                 case "j":
                     return tipo_j(instrucao, sep);
                     break;
+                case "jal":
+                    return tipo_j(instrucao, sep);
+                    break;
                 default:
                     Status = "Instrução não suportada ou formato inválido";
                     flag_error = true;
@@ -135,44 +178,84 @@ namespace MIPS_Assembler
 
         private string tipo_r(string instrucao, string sep)
         {
-            //Ex ADD $X, $Y, $Z
+            ///Ex ADD $X, $Y, $Z
+            /// Instr rd, rs, rt|SHAMT
             string[] campos = instrucao.ToLower().Split(' ');
+            
             string Inst = campos[0];
-            string X = campos[1].Remove(campos[1].Length - 1).Remove(0, 1);//tira vírgula
-            string Y = campos[2].Remove(campos[2].Length - 1).Remove(0, 1);//tira vírgula
-            string Z = campos[3].Remove(0, 1);
+            string X = campos[1].Replace("$", "");  // rd
+            string Y = campos[2].Replace("$", "");  // rs
+            string Z = campos[3].Replace("$", "");  // rt
             string FUNCT = "@@@@@@";
+            string SHAMT = "00000";
+            Console.WriteLine($"inst: {Inst} x:{X} y:{Y} z:{Z}");
 
+            string Temp = ""; // variável auxiliar para trocar rs e rt
+            Status = "Conversão efetuada com sucesso";
             switch (Inst)
             {
                 case "add":
                     FUNCT = "100000";
-                    Status = "Conversão efetuada com sucesso";
                     break;
                 case "sub":
                     FUNCT = "100010";
-                    Status = "Conversão efetuada com sucesso";
                     break;
                 case "and":
                     FUNCT = "100100";
-                    Status = "Conversão efetuada com sucesso";
                     break;
                 case "or":
                     FUNCT = "100101";
-                    Status = "Conversão efetuada com sucesso";
+                    break;
+                case "nor":
+                    FUNCT = "100111";
                     break;
                 case "slt":
                     FUNCT = "101010";
-                    Status = "Conversão efetuada com sucesso";
+                    break;
+                case "sll":
+                    FUNCT = "000000";
+                    SHAMT = Z;
+                    Z = Y;
+                    Y = "0";
+                    break;
+                case "srl":
+                    FUNCT = "000010";
+                    SHAMT = Z;
+                    Z = Y;
+                    Y = "0";
+                    break;
+                case "sra":
+                    FUNCT = "000011";
+                    SHAMT = Z;
+                    Z = Y;
+                    Y = "0";
+                    break;
+                case "sllv":
+                    FUNCT = "000100";
+                    Temp = Y;
+                    Y = Z;
+                    Z = Temp;
+                    break;
+                case "srlv":
+                    FUNCT = "000110";
+                    Temp = Y;
+                    Y = Z;
+                    Z = Temp;
+                    break;
+                case "srav":
+                    FUNCT = "000111";
+                    Temp = Y;
+                    Y = Z;
+                    Z = Temp;
                     break;
                 default:
-                    Status = "Instrução não suportada";
+                    Status = $"Instrução não suportada ({Inst})";
                     flag_error = true;
                     break;
             }
 
             //OP RS RT RD SHAMT FUNCT
-            return "000000" + sep + hex2binary(Y).PadLeft(5, '0') + sep + hex2binary(Z).PadLeft(5, '0') + sep + hex2binary(X).PadLeft(5, '0') + sep + "00000" + sep + FUNCT;
+            return "000000" + sep + hex2binary(Y).PadLeft(5, '0') + sep + hex2binary(Z).PadLeft(5, '0') + sep + hex2binary(X).PadLeft(5, '0') + sep + hex2binary(SHAMT).PadLeft(5, '0') + sep + FUNCT;
         }
 
         private string tipo_i(string instrucao, string sep)
@@ -180,8 +263,8 @@ namespace MIPS_Assembler
             //Ex ADDi $X, $Y, i
             string[] campos = instrucao.ToLower().Split(' ');
             string Inst = campos[0];
-            string X = campos[1].Remove(campos[1].Length - 1).Remove(0, 1);//tira vírgula
-            string Y = campos[2].Remove(campos[2].Length - 1).Remove(0, 1);//tira vírgula
+            string X = campos[1].Remove(0, 1);
+            string Y = campos[2].Remove(0, 1);
             string i = campos[3];
             string cod_maq = "@@@@@@_@@@@@_@@@@@_@@@@@@@@@@@@@@@@";
 
@@ -221,10 +304,10 @@ namespace MIPS_Assembler
             //Ex LW $X, i($Y)
             string[] campos = instrucao.ToLower().Split(' ');
             string Inst = campos[0];
-            string X = campos[1].Remove(campos[1].Length - 1).Remove(0, 1);//tira vírgula
+            string X = campos[1].Remove(0, 1);//tira vírgula
             string[] iY = campos[2].Split('(');//tira vírgula
             string i = iY[0];
-            string Y = iY[1].Remove(iY[1].Length - 1).Remove(0, 1);
+            string Y = iY[1].Remove(iY[1].Length-1, 1).Remove(0, 1);
             string OP = "@@@@@@";
 
             switch (Inst)
@@ -260,6 +343,7 @@ namespace MIPS_Assembler
         private string hex2binary(string hexvalue)
         {
             string binaryval = "";
+            Console.WriteLine("hex: " + hexvalue);
             binaryval = Convert.ToString(Convert.ToInt32(hexvalue, 16), 2);
             return binaryval;
         }
@@ -331,6 +415,11 @@ namespace MIPS_Assembler
                 Status = "Erro ao abrir o arquivo .mif";
                 MessageBox.Show("Erro ao abrir o arquivo .mif. Possivelmente formato inválido. Só é possível carregar um .mif gerado a partir desse mesmo aplicativo.");
             }
+
+        }
+
+        private void richTextBox_MIPS_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

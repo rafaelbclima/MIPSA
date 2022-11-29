@@ -117,6 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBox_MIPS.Text" xml:space="preserve">
+    <value>ADD $1, $2, $3
+SUB $1, $2, $3
+AND $1, $2, $3
+OR $1, $2, $3
+SLT $1, $2, $3
+LW $1, 5($2) 
+SW $1, 5($2)
+BEQ $1, $2, 5
+ADDi $1, $2, 5
+ANDi $1, $2, 5
+ORi $1, $2, 5
+SLTi $1, $2, 5
+NOR $5, $1, $1
+SLL $1, $2, 1A
+SRLV $3, $2, $1
+J 5</value>
+  </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
