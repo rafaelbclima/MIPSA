@@ -84,7 +84,7 @@ namespace MIPS_Assembler
             catch
             {
                 Status = "Instrução não suportada ou formato inválido";
-               
+                MessageBox.Show("Instrução não suportada ou formato inválido!\nVerifique se ficou algum espaço ou linha em branco.");
             }
             
         }
@@ -331,13 +331,28 @@ namespace MIPS_Assembler
 
         private string tipo_j(string instrucao, string sep)
         {
-            //Ex j i
+            //Ex j i e jal i
             string[] campos = instrucao.ToLower().Split(' ');
             string Inst = campos[0];
             string i = campos[1];
-            Status = "Conversão efetuada com sucesso"; 
+            string OP = "@@@@@@";
 
-            return "000010" + sep + hex2binary(i).PadLeft(26, '0');
+            switch (Inst)
+            {
+                case "j":
+                    OP = "000010";
+                    Status = "Conversão efetuada com sucesso";
+                    break;
+                case "jal":
+                    OP = "000011";
+                    Status = "Conversão efetuada com sucesso";
+                    break;
+                default:
+                    Status = "Instrução não suportada";
+                    flag_error = true;
+                    break;
+            }
+            return OP + sep + hex2binary(i).PadLeft(26, '0'); 
         }
 
         private string hex2binary(string hexvalue)
@@ -358,26 +373,34 @@ namespace MIPS_Assembler
 
         private void sobreToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("UFCG - UAEE\nLab. de Arquitetura de Sistemas Digitais - Prof. Rafael Lima\nMIPS Assembler V1.3");
+            MessageBox.Show("UFCG - UAEE\nLab. de Arquitetura de Sistemas Digitais - Prof. Rafael Lima\nMIPS Assembler V1.4");
         }
 
         private void ajudaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Instruções suportadas:\n\n" +
-                "ADD $X, $Y, $Z" + "\n" +
-                "SUB $X, $Y, $Z" + "\n" +
-                "AND $X, $Y, $Z" + "\n" +
-                "OR $X, $Y, $Z" + "\n" +
-                "SLT $X, $Y, $Z" + "\n" +
-                "LW $X, i($Y)" + "\n" +
-                "SW $X, i($Y)" + "\n" +
-                "BEQ $X, $Y, i" + "\n" +
-                "ADDi $X, $Y, i" + "\n" +
-                "ANDi $X, $Y, i" + "\n" +
-                "ORi $X, $Y, i" + "\n" +
-                "SLTi $X, $Y, i" + "\n" +
-                "J i" + "\n" + "\n" +
-                "\nResistradores: \n\n$0, $1, $2, $3, $4, $5, $6, $7" + 
+                "ADD $X, $Y, $Z"    + "\t $X = $Y + $Z\n" +
+                "SUB $X, $Y, $Z"    + "\t $X = $Y + ~$Z +1\n" +
+                "AND $X, $Y, $Z"    + "\t $X = $Y & $Z\n" +
+                "OR $X, $Y, $Z"     + "\t $X = $Y | $Z\n" +
+                "NOR $X, $Y, $Z"    + "\t $X = ~($Y | $Z)\n" +
+                "SLT $X, $Y, $Z"    + "\t $X = 1 se $Y < $Z e 0 c.c.\n" +
+                "SLL $X, $Y, shamt" + "\t $X = $Y << shamt\n" +
+                "SRL $X, $Y, shamt" + "\t $X = $Y >> shamt\n" +
+                "SRA $X, $Y, shamt" + "\t $X = $Y >>> shamt\n" +
+                "SLLv $X, $Y, $Z"   + "\t $X = $Y << $Z\n" +
+                "SRLv $X, $Y, $Z"   + "\t $X = $Y >> $Z\n" +
+                "SRAv $X, $Y, $Z"   + "\t $X = $Y >>> $Z\n" +
+                "LW $X, i($Y)"      + "\t $X <= Cont. do end. ($Y+ i)\n" +
+                "SW $X, i($Y)"      + "\t End. ($Y+ i) <= $X\n" +
+                "BEQ $X, $Y, i"     + "\t Se $X == $Y, PC = PC + 1 + i\n" +
+                "ADDi $X, $Y, i"    + "\t $X = $Y + i\n" +
+                "ANDi $X, $Y, i"    + "\t $X = $Y & i\n" +
+                "ORi $X, $Y, i"     + "\t $X = $Y | i\n" +
+                "SLTi $X, $Y, i"    + "\t $X = 1 se $Y < i e 0 c.c.\n" +
+                "J i"               + "\t \t PC = i\n" +
+                "JAL i"             + "\t \t $7 = PC+1 e PC = i\n" + "\n" +
+                "\nRegistradores: \n\n$0, $1, $2, $3, $4, $5, $6, $7" + 
                 "\nObs: Usar o $ antes do registrador,\nespaço simples e vírgula." +
                 "\nTodas as constantes são assumidas em hexa.");
         }
