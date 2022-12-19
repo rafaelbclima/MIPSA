@@ -31,3 +31,4 @@ As seguintes instruções são suportadas:
 |SLTi $X, $Y, i   |$X = 1 se $Y < i e 0 c.c.|
 |J i              |PC = i|
 |JAL i            |$7 = PC+1 e PC = i\n|
+|NOP              |No operation|
