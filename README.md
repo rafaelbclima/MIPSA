@@ -32,3 +32,6 @@ As seguintes instruções são suportadas:
 |J i              |PC = i|
 |JAL i            |$7 = PC+1 e PC = i\n|
 |NOP              |No operation|
+
+
+![alt text](https://github.com/rafaelbclima/MIPSA/blob/main/temp.jpg)
