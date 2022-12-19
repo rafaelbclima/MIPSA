@@ -123,6 +123,7 @@ SUB $1, $2, $3
 AND $1, $2, $3
 OR $1, $2, $3
 NOR $1, $2, $3
+XOR $1, $2, $3
 SLT $1, $2, $3
 SLL $1, $2, 5
 SRL $1, $2, 5
@@ -138,7 +139,8 @@ ANDi $1, $2, 5
 ORi $1, $2, 5
 SLTi $1, $2, 5
 J 5
-JAL 5</value>
+JAL 5
+NOP</value>
   </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

@@ -43,7 +43,11 @@ namespace MIPS_Assembler
             try
             {
                 flag_error = false;
-                //Converter para o richtextbox
+
+                richTextBox_MIPS.Text = Regex.Replace(richTextBox_MIPS.Text, @"^\s*$\n|\r", "", RegexOptions.Multiline).TrimEnd();
+
+
+                //Converter para o richtextbox de código de máquina
                 richTextBox_cod_maq.Text = "";
                 foreach (string element in richTextBox_MIPS.Lines)
                 {
@@ -95,7 +99,6 @@ namespace MIPS_Assembler
             string[] campos = Regex.Split(instrucao.ToLower(), @"[, ]+");
             instrucao = String.Join(" ", campos);   
             
-            
             Console.WriteLine(campos.Length + " > " + instrucao);
             string Inst = campos[0];
 
@@ -115,6 +118,9 @@ namespace MIPS_Assembler
                     return tipo_r(instrucao, sep);
                     break;
                 case "nor":
+                    return tipo_r(instrucao, sep);
+                    break;
+                case "xor":
                     return tipo_r(instrucao, sep);
                     break;
                 case "slt":
@@ -168,6 +174,10 @@ namespace MIPS_Assembler
                 case "jal":
                     return tipo_j(instrucao, sep);
                     break;
+                //NOP - No operation **************
+                case "nop":
+                    return "000000" + sep + "00000" + sep + "00000" + sep + "00000" + sep + "00000" + sep + "100000"; //ADD $0, $0, $0
+                    break;
                 default:
                     Status = "Instrução não suportada ou formato inválido";
                     flag_error = true;
@@ -208,6 +218,9 @@ namespace MIPS_Assembler
                     break;
                 case "nor":
                     FUNCT = "100111";
+                    break;
+                case "xor":
+                    FUNCT = "100110";
                     break;
                 case "slt":
                     FUNCT = "101010";
@@ -384,6 +397,7 @@ namespace MIPS_Assembler
                 "AND $X, $Y, $Z"    + "\t $X = $Y & $Z\n" +
                 "OR $X, $Y, $Z"     + "\t $X = $Y | $Z\n" +
                 "NOR $X, $Y, $Z"    + "\t $X = ~($Y | $Z)\n" +
+                "XOR $X, $Y, $Z"    + "\t $X = $Y ^ $Z\n" +
                 "SLT $X, $Y, $Z"    + "\t $X = 1 se $Y < $Z e 0 c.c.\n" +
                 "SLL $X, $Y, shamt" + "\t $X = $Y << shamt\n" +
                 "SRL $X, $Y, shamt" + "\t $X = $Y >> shamt\n" +
