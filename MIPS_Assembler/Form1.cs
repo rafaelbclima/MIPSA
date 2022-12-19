@@ -24,7 +24,6 @@ namespace MIPS_Assembler
         bool flag_error = false;
         string sep = "";
         string mif_name = "RomInstMem_init";
-        //string[] mif_cabecalho = { "WIDTH = 32;", "DEPTH=256;", "ADDRESS_RADIX=UNS;","DATA_RADIX=BIN;", "CONTENT BEGIN"}; Environment.NewLine
         string mif_cabecalho = "--Arquivo gerado para o LASD - UFCG - Prof. Rafael Lima" + Environment.NewLine
             + "WIDTH = 32;" + Environment.NewLine 
             + "DEPTH=256;" + Environment.NewLine 
@@ -38,14 +37,12 @@ namespace MIPS_Assembler
 
         private void converterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //richTextBox_cod_maq.Text = tipo_r("ADD $2, $0, $1");
-            //richTextBox_cod_maq.Text = tipo_j(richTextBox_MIPS.Lines[0]);
             try
             {
                 flag_error = false;
 
+                //Remover linhas vazias do código assembly
                 richTextBox_MIPS.Text = Regex.Replace(richTextBox_MIPS.Text, @"^\s*$\n|\r", "", RegexOptions.Multiline).TrimEnd();
-
 
                 //Converter para o richtextbox de código de máquina
                 richTextBox_cod_maq.Text = "";
@@ -53,8 +50,8 @@ namespace MIPS_Assembler
                 {
                     richTextBox_cod_maq.Text += assembler_mips(element, sep) + "\n";
                 }
-                //Escrever no arquivo
 
+                //Escrever no arquivo. OBS converte novamente (sub ótimo)
                 string mif_instructions = "";
                 mif_instructions = String.Copy(mif_cabecalho);
                 for (int i = 0; i < richTextBox_MIPS.Lines.Length; i++)
@@ -386,7 +383,7 @@ namespace MIPS_Assembler
 
         private void sobreToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("UFCG - UAEE\nLab. de Arquitetura de Sistemas Digitais - Prof. Rafael Lima\nMIPS Assembler V1.4");
+            MessageBox.Show("UFCG - UAEE\nLab. de Arquitetura de Sistemas Digitais - Prof. Rafael Lima\nMIPS Assembler V1.5");
         }
 
         private void ajudaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -413,7 +410,8 @@ namespace MIPS_Assembler
                 "ORi $X, $Y, i"     + "\t $X = $Y | i\n" +
                 "SLTi $X, $Y, i"    + "\t $X = 1 se $Y < i e 0 c.c.\n" +
                 "J i"               + "\t \t PC = i\n" +
-                "JAL i"             + "\t \t $7 = PC+1 e PC = i\n" + "\n" +
+                "JAL i"             + "\t \t $7 = PC+1 e PC = i\n" +
+                "NOP"               + "\t \t No operation\n" + "\n" +
                 "\nRegistradores: \n\n$0, $1, $2, $3, $4, $5, $6, $7" + 
                 "\nObs: Usar o $ antes do registrador,\nespaço simples e vírgula." +
                 "\nTodas as constantes são assumidas em hexa.");
